@@ -28,7 +28,25 @@ module.exports = {
       },
       {
         test: /\.less$/,
-        use: ["style-loader", "css-loader", "less-loader"]
+        use: [
+          {
+            loader: "style-loader"
+          },
+          {
+            loader: "css-loader",
+            options: {
+              url: true,
+              modules: {
+                mode: "local",
+                localIdentName: "[local]--[hash:base64:5]"
+              },
+              localsConvention: "camelCase"
+            }
+          },
+          {
+            loader: "less-loader"
+          }
+        ]
       }
     ]
   },
