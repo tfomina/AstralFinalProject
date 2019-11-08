@@ -1,27 +1,28 @@
 import React from "react";
 import PropTypes from "prop-types";
+import clsx from "clsx";
 
 import styles from "./Button.less";
 
 export const Button = props => {
-  const { color, backgroundColor } = props;
-
+  const { className, onClick, icon } = props;
   return (
     <button
       className={styles.button}
-      style={{ color: color, backgroundColor: backgroundColor }}
+      onClick={onClick}
+      className={clsx(styles.button, className)}
     >
+      <span className={styles.icon}>{icon}</span>
       {props.children || ""}
     </button>
   );
 };
 
 Button.defaultProps = {
-  color: "#07319D",
-  backgroundColor: "#fff"
+  onClick: () => {}
 };
 
 Button.propTypes = {
-  color: PropTypes.string.isRequired,
-  backgroundColor: PropTypes.string.isRequired
+  onClick: PropTypes.func.isRequired,
+  icon: PropTypes.ReactNode
 };

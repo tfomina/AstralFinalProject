@@ -1,3 +1,55 @@
+@import "./../../variables.less";
+
 .list {
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  & > li {
+    display: flex;
+    justify-content: center;
+    flex-basis: 33.33%;
+    padding-bottom: 40px;
+    overflow: hidden;
+
+    .frame {
+      width: 100%;
+      max-width: 305px;
+    }
+  }
+}
+
+@media (max-width: @large) {
+  .list {
+    & > li {
+      .frame {
+        max-width: 95%;
+      }
+    }
+  }
+}
+
+@media (max-width: @medium) {
+  .list {
+    & > li {
+      flex-basis: 50%;
+
+      .frame {
+        max-width: 90%;
+      }
+    }
+  }
+}
+
+@media (max-width: @small) {
+  .list {
+    & > li {
+      flex-basis: 100%;
+
+      .frame {
+        max-width: 100%;
+      }
+    }
+  }
 }

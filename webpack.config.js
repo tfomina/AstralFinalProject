@@ -6,7 +6,8 @@ module.exports = {
   entry: "./src/index.jsx",
   output: {
     path: path.join(__dirname, "dist"),
-    filename: "bundle.js"
+    filename: "bundle.js",
+    publicPath: "/"
   },
   resolve: {
     extensions: [".js", ".jsx"]
@@ -25,6 +26,10 @@ module.exports = {
         test: /\.(js|jsx)?$/,
         exclude: /(node_modules)/,
         use: "babel-loader"
+      },
+      {
+        test: /\.css$/,
+        use: [{ loader: "style-loader" }, { loader: "css-loader" }]
       },
       {
         test: /\.less$/,
@@ -47,6 +52,17 @@ module.exports = {
             loader: "less-loader"
           }
         ]
+      },
+      {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        issuer: {
+          test: /\.jsx?$/
+        },
+        use: ["babel-loader", "@svgr/webpack", "url-loader"]
+      },
+      {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url-loader"
       }
     ]
   },

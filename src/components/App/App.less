@@ -1,20 +1,52 @@
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  font-family: sans-serif;
-  line-height: 1.5;
-}
+@import "./../../variables.less";
 
-body {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  background: #fff;
-  color: #000;
-}
-
-.app {
+.container {
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  max-width: @large;
+  margin: 0 auto;
+}
+
+@media (max-width: @medium) {
+  .container {
+    max-width: @medium;
+  }
+}
+
+@media (max-width: @small) {
+  .container {
+    max-width: 100%;
+  }
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  padding: 15px 10px;
+
+  .sign-in {
+    background-color: @blue;
+    color: @white;
+    box-shadow: none;
+    margin-left: auto;
+  }
+
+  .sign-up {
+    background-color: transparent;
+    box-shadow: none;
+    margin-left: 10px;
+    padding-right: 0;
+  }
+}
+
+main {
+  flex: 1;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  padding: 15px 0;
 }
