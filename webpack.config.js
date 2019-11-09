@@ -10,7 +10,10 @@ module.exports = {
     publicPath: "/"
   },
   resolve: {
-    extensions: [".js", ".jsx"]
+    extensions: [".js", ".jsx"],
+    alias: {
+      utils: path.join(__dirname, "utils")
+    }
   },
   devServer: {
     contentBase: path.join(__dirname, "dist"),
