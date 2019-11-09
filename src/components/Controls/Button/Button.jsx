@@ -5,15 +5,15 @@ import clsx from "clsx";
 import styles from "./Button.less";
 
 export const Button = props => {
-  const { className, onClick, icon } = props;
+  const { className, onClick, icon, children } = props;
   return (
     <button
       className={styles.button}
       onClick={onClick}
       className={clsx(styles.button, className)}
     >
-      <span className={styles.icon}>{icon}</span>
-      {props.children || ""}
+      {icon && <span className={styles.icon}>{icon}</span>}
+      {children || ""}
     </button>
   );
 };

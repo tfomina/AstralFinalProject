@@ -1,7 +1,7 @@
 import React from "react";
 import clsx from "clsx";
 
-import Button from "../Controls";
+import { Button } from "../Controls";
 import { ReactComponent as Comment } from "./../../images/comment.svg";
 import { ReactComponent as Heart } from "./../../images/heart.svg";
 

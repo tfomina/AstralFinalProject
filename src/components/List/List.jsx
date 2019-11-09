@@ -7,19 +7,19 @@ import styles from "./List.less";
 export const List = () => (
   <ul className={styles.list}>
     <li>
-      <Frame className={styles.frame} />
+      <Frame className={styles.listFrame} />
     </li>
     <li>
-      <Frame className={styles.frame} />
+      <Frame className={styles.listFrame} />
     </li>
     <li>
-      <Frame className={styles.frame} />
+      <Frame className={styles.listFrame} />
     </li>
     <li>
-      <Frame className={styles.frame} />
+      <Frame className={styles.listFrame} />
     </li>
     <li>
-      <Frame className={styles.frame} />
+      <Frame className={styles.listFrame} />
     </li>
   </ul>
 );
