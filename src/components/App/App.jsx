@@ -5,6 +5,8 @@ import {
   Route,
   Redirect
 } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSignInAlt, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import List from "./../List";
 import Post from "./../Post";
 import SignIn from "./../SignIn";
@@ -41,9 +43,21 @@ export const App = () => {
           <Button className={styles.signIn} onClick={toggleSignInVisibility}>
             Войти
           </Button>
+          <FontAwesomeIcon
+            icon={faSignInAlt}
+            className={styles.signInIcon}
+            onClick={toggleSignInVisibility}
+            title="Войти"
+          />
           <Button className={styles.signUp} onClick={toggleSignUpVisibility}>
             Зарегистрироваться
           </Button>
+          <FontAwesomeIcon
+            icon={faUserPlus}
+            className={styles.signUpIcon}
+            onClick={toggleSignUpVisibility}
+            title="Зарегистрироваться"
+          />
         </header>
         <main>
           <Router>

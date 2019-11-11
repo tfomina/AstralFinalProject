@@ -11,16 +11,19 @@ import styles from "./Frame.less";
 const HASHTAG_REGEX = new RegExp(/(^|\s)(#[a-z\d-_]+)/gi);
 
 export const Frame = props => {
-  const { className, id, image, text, comments, likes } = props;
+  const { className, data } = props;
+  const { image, text, comments, likes } = data;
 
   const parseHashtags = () => (
     <p
       className={styles.text}
       dangerouslySetInnerHTML={{
-        __html: text.replace(
-          HASHTAG_REGEX,
-          `$1 <span class=${styles.hashtag}>$2 </span>`
-        )
+        __html: text
+          ? text.replace(
+              HASHTAG_REGEX,
+              `$1 <span class=${styles.hashtag}>$2 </span>`
+            )
+          : ""
       }}
     />
   );
@@ -43,20 +46,13 @@ export const Frame = props => {
   );
 };
 
-// TODO: удалить, когда появятся настоящие данные
-Frame.defaultProps = {
-  id: "97bbafe5-d8cb-454e-8709-4c3c526190f0",
-  image: "./../images/img_1.jpg",
-  text:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit #hashtag #frame #image",
-  comments: 5,
-  likes: 12
-};
-
 Frame.propTypes = {
-  id: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
-  comments: PropTypes.number.isRequired,
-  likes: PropTypes.number.isRequired
+  className: PropTypes.string,
+  data: PropTypes.exact({
+    id: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+    comments: PropTypes.number.isRequired,
+    likes: PropTypes.number.isRequired
+  })
 };
