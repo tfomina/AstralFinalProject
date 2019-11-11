@@ -24,5 +24,5 @@ Button.defaultProps = {
 
 Button.propTypes = {
   onClick: PropTypes.func.isRequired,
-  icon: PropTypes.ReactNode
+  icon: PropTypes.element
 };
