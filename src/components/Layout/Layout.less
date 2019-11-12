@@ -1,0 +1,86 @@
+@import "./../../variables.less";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  max-width: @large;
+  margin: 0 auto;
+}
+
+@media (max-width: @medium) {
+  .container {
+    max-width: @medium;
+  }
+}
+
+@media (max-width: @small) {
+  .container {
+    max-width: 100%;
+  }
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  padding: 15px 10px;
+  align-items: center;
+
+  .sign-in {
+    background-color: @blue;
+    color: @white;
+    box-shadow: none;
+    margin-left: auto;
+  }
+
+  .sign-up {
+    background-color: transparent;
+    box-shadow: none;
+    margin-left: 10px;
+    padding-right: 0;
+  }
+
+  .sign-in-icon,
+  .sign-up-icon {
+    color: @black;
+    cursor: pointer;
+    display: none;
+    font-size: 24px;
+
+    &:hover {
+      color: @blue;
+    }
+  }
+
+  .sign-in-icon {
+    margin-left: auto;
+  }
+  .sign-up-icon {
+    margin-left: 15px;
+  }
+}
+
+@media (max-width: @small) {
+  header {
+    .sign-in,
+    .sign-up {
+      display: none;
+    }
+
+    .sign-in-icon,
+    .sign-up-icon {
+      display: block;
+    }
+  }
+}
+
+main {
+  flex: 1;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  padding: 15px 0;
+}
