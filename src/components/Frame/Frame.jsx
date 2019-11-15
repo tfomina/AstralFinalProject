@@ -35,10 +35,18 @@ export const Frame = props => {
       </div>
       {parseHashtags()}
       <div className={styles.buttonsWrapper}>
-        <Button icon={<Heart />} className={styles.button}>
+        <Button
+          icon={<Heart />}
+          className={styles.button}
+          title="Мне нравится!"
+        >
           {likes}
         </Button>
-        <Button icon={<Comment />} className={styles.button}>
+        <Button
+          icon={<Comment />}
+          className={styles.button}
+          title="Посмотреть комментарии"
+        >
           {comments}
         </Button>
       </div>

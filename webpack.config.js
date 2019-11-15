@@ -23,6 +23,9 @@ module.exports = {
     historyApiFallback: true,
     watchContentBase: true
   },
+  optimization: {
+    usedExports: true
+  },
   module: {
     rules: [
       {

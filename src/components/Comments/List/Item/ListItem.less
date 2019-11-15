@@ -1,0 +1,55 @@
+@import "./../../../../variables.less";
+
+.item {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid @light-gray;
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+
+  .author {
+    color: @blue;
+    padding-right: 15px;
+    flex: 1;
+  }
+
+  .text {
+    flex: 3;
+  }
+
+  .delete {
+    position: relative;
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    cursor: pointer;
+    display: none;
+
+    &:before,
+    &:after {
+      position: absolute;
+      left: 5px;
+      content: "";
+      height: 13px;
+      width: 2px;
+      background-color: @gray;
+    }
+    &:before {
+      transform: rotate(45deg);
+    }
+    &:after {
+      transform: rotate(-45deg);
+    }
+
+    &:hover:before,
+    &:hover:after {
+      background-color: @red;
+    }
+  }
+
+  &:hover {
+    .delete {
+      display: inline-block;
+    }
+  }
+}

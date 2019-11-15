@@ -1,0 +1,20 @@
+@import "./../../variables.less";
+
+.post {
+  display: flex;
+
+  &-frame {
+    box-shadow: none;
+    flex: 1.5;
+  }
+
+  &-comments {
+    flex: 1;
+  }
+}
+
+@media (max-width: @medium) {
+  .post {
+    flex-direction: column;
+  }
+}

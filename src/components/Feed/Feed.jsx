@@ -2,7 +2,7 @@ import React from "react";
 
 import Frame from "../Frame";
 
-import styles from "./List.less";
+import styles from "./Feed.less";
 
 let fake_data = [];
 for (let i = 0; i < 10; i++) {
@@ -16,13 +16,13 @@ for (let i = 0; i < 10; i++) {
   });
 }
 
-export const List = () => (
+export const Feed = () => (
   <>
     {fake_data.length && (
-      <ul className={styles.list}>
+      <ul className={styles.feed}>
         {fake_data.map(item => (
           <li key={item.id}>
-            <Frame data={item} className={styles.listFrame} />
+            <Frame data={item} className={styles.feedFrame} />
           </li>
         ))}
       </ul>
