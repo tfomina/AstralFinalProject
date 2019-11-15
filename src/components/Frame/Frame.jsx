@@ -12,7 +12,7 @@ const HASHTAG_REGEX = new RegExp(/(^|\s)(#[a-z\d-_]+)/gi);
 
 export const Frame = props => {
   const { className, data } = props;
-  const { image, text, comments, likes } = data;
+  const { id, image, text, comments, likes } = data;
 
   const parseHashtags = () => (
     <p
@@ -27,6 +27,10 @@ export const Frame = props => {
       }}
     />
   );
+
+  const openPost = () => {
+    window.open(`/post/${id}`, "_self");
+  };
 
   return (
     <div className={clsx(styles.frame, className)}>
@@ -46,6 +50,7 @@ export const Frame = props => {
           icon={<Comment />}
           className={styles.button}
           title="Посмотреть комментарии"
+          onClick={openPost}
         >
           {comments}
         </Button>
