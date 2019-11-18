@@ -5,13 +5,14 @@ import clsx from "clsx";
 import { Button } from "../Controls";
 import { ReactComponent as Comment } from "./../../images/comment.svg";
 import { ReactComponent as Heart } from "./../../images/heart.svg";
+import { ReactComponent as HeartFilled } from "./../../images/heart_filled.svg";
 
 import styles from "./Frame.less";
 
 const HASHTAG_REGEX = new RegExp(/(^|\s)(#[a-z\d-_]+)/gi);
 
 export const Frame = props => {
-  const { className, data } = props;
+  const { className, data, isCommentButtonVisible } = props;
   const { id, image, text, comments, likes } = data;
 
   const parseHashtags = () => (
@@ -40,23 +41,29 @@ export const Frame = props => {
       {parseHashtags()}
       <div className={styles.buttonsWrapper}>
         <Button
-          icon={<Heart />}
+          icon={likes && likes.length ? <HeartFilled /> : <Heart />}
           className={styles.button}
           title="Мне нравится!"
         >
-          {likes}
+          {(likes && likes.length) || "0"}
         </Button>
-        <Button
-          icon={<Comment />}
-          className={styles.button}
-          title="Посмотреть комментарии"
-          onClick={openPost}
-        >
-          {comments}
-        </Button>
+        {isCommentButtonVisible && (
+          <Button
+            icon={<Comment />}
+            className={styles.button}
+            title="Посмотреть комментарии"
+            onClick={openPost}
+          >
+            {(comments && comments.length) || "0"}
+          </Button>
+        )}
       </div>
     </div>
   );
+};
+
+Frame.defaultProps = {
+  isCommentButtonVisible: true
 };
 
 Frame.propTypes = {
@@ -67,5 +74,6 @@ Frame.propTypes = {
     text: PropTypes.string.isRequired,
     comments: PropTypes.number.isRequired,
     likes: PropTypes.number.isRequired
-  })
+  }),
+  isCommentButtonVisible: PropTypes.boolean
 };

@@ -15,7 +15,11 @@ const data = {
 
 export const Post = () => (
   <div className={styles.post}>
-    <Frame data={data} className={styles.postFrame} />
+    <Frame
+      data={data}
+      className={styles.postFrame}
+      isCommentButtonVisible={false}
+    />
     <Comments className={styles.postComments} />
   </div>
 );
