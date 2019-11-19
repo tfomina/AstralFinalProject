@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
 import clsx from "clsx";
 
 import { List } from "./List/List";
@@ -7,25 +8,32 @@ import { CommentForm as Form } from "./Form/Form";
 
 import styles from "./Comments.less";
 
-let fake_comments = [];
-for (let i = 0; i < 10; i++) {
-  fake_comments.push({
-    id: `15bbafe5-d8cb-454e-8709-4c3c526190f${i}`,
-    userId: `97bbafe5-d8cb-454e-8709-4c3c526190f${i}`,
-    postId: `32bbafe5-d8cb-454e-8709-4c3c526190f${i}`,
-    text:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-  });
-}
-
 export const Comments = props => {
-  const { className } = props;
+  const { className, data } = props;
+
+  const currentUser = useSelector(state => state.users.currentUser) || null;
+  const users = useSelector(state => state.users.users) || [];
+
+  const comments = data.comments.map(c => ({
+    ...c,
+    userName: users.find(u => u.id === c.userId).name,
+    postId: data.id
+  }));
+
   return (
     <div className={clsx(styles.comments, className)}>
-      <List comments={fake_comments} />
-      <Form />
+      <List comments={comments} />
+      {currentUser && <Form />}
     </div>
   );
 };
 
-Comments.propTypes = {};
+Comments.propTypes = {
+  data: PropTypes.exact({
+    id: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+    comments: PropTypes.array.isRequired,
+    likes: PropTypes.array.isRequired
+  })
+};

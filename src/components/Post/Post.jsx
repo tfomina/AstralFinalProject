@@ -9,13 +9,13 @@ export const Post = props => {
   const { id } = props.match.params;
   const data = useSelector(state => {
     const { posts } = state;
-    return posts[posts.findIndex(p => p.id === id)] || [];
+    return posts.find(p => p.id === id) || [];
   });
 
   return (
     <div className={styles.post}>
       <Frame data={data} className={styles.postFrame} isFeedPost={false} />
-      <Comments className={styles.postComments} />
+      <Comments className={styles.postComments} data={data} />
     </div>
   );
 };

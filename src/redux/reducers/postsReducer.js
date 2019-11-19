@@ -4,8 +4,23 @@ const getInitialState = () => [
     image: `./../images/img_1.jpg`,
     text:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. #hashtag #frame #image",
-    comments: [],
-    likes: []
+    comments: [
+      {
+        id: "b8b61e47-aed9-4551-b15e-44d14a416127",
+        userId: "9f15cdc6-a40d-4579-a125-432285a2fbfd",
+        text: "Phasellus efficitur vestibulum nisl in bibendum."
+      },
+      {
+        id: "ca329dd5-0d68-46d3-b81a-d2b79803faa4",
+        userId: "9f15cdc6-a40d-4579-a125-432285a2fbfd",
+        text: "Cras non lacinia est."
+      }
+    ],
+    likes: [
+      {
+        userId: "9f15cdc6-a40d-4579-a125-432285a2fbfd"
+      }
+    ]
   },
   {
     id: "efbe32d1-7358-4ddc-b607-9ce84484da88",
@@ -20,22 +35,52 @@ const getInitialState = () => [
     text:
       "Phasellus efficitur vestibulum nisl in bibendum. #hashtag #frame #image",
     comments: [],
-    likes: []
+    likes: [
+      {
+        userId: "9f15cdc6-a40d-4579-a125-432285a2fbfd"
+      }
+    ]
   },
   {
     id: "2207f9fd-3cce-46f6-815b-068efa159e15",
     image: `./../images/img_4.jpg`,
     text:
       "Phasellus vulputate ex tincidunt imperdiet auctor. #hashtag #frame #image",
-    comments: [],
-    likes: []
+    comments: [
+      {
+        id: "b9f8375a-034b-4ded-842b-4c0f2fc94987",
+        userId: "9f15cdc6-a40d-4579-a125-432285a2fbfd",
+        text: "Phasellus efficitur vestibulum nisl in bibendum."
+      },
+      {
+        id: "3e612913-879d-4c76-abb5-fbe55d5d97e5",
+        userId: "9f15cdc6-a40d-4579-a125-432285a2fbfd",
+        text: "Cras non lacinia est."
+      }
+    ],
+    likes: [
+      {
+        userId: "9f15cdc6-a40d-4579-a125-432285a2fbfd"
+      }
+    ]
   },
   {
     id: "8a88646b-0ad2-4ae7-99e2-7a08b465d6ab",
     image: `./../images/img_5.jpg`,
     text:
       "Aenean ac mi egestas, semper nisl vel, pulvinar neque. In consequat enim id malesuada malesuada. Quisque ultricies, lectus et semper sodales. #hashtag #frame #image",
-    comments: [],
+    comments: [
+      {
+        id: "c94e4015-8c09-4290-ad24-8b06ea528fd5",
+        userId: "9f15cdc6-a40d-4579-a125-432285a2fbfd",
+        text: "Phasellus efficitur vestibulum nisl in bibendum."
+      },
+      {
+        id: "6819869c-797b-4671-9978-4e59c7af12f9",
+        userId: "9f15cdc6-a40d-4579-a125-432285a2fbfd",
+        text: "Cras non lacinia est."
+      }
+    ],
     likes: []
   },
   {
