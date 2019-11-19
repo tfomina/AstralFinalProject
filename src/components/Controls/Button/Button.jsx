@@ -10,7 +10,7 @@ export const Button = props => {
     <button
       className={styles.button}
       onClick={onClick}
-      className={clsx(styles.button, className)}
+      className={clsx(styles.button, className, disabled && styles.disabled)}
       title={title}
       disabled={disabled}
     >

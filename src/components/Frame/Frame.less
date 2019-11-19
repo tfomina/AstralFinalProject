@@ -36,6 +36,14 @@
 
     .button {
       width: 116px;
+
+      &.full-width {
+        flex: 1;
+
+        & ~ * {
+          margin-left: 20px;
+        }
+      }
     }
   }
 }

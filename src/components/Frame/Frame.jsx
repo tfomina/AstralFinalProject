@@ -33,6 +33,10 @@ export const Frame = props => {
     />
   );
 
+  const openPost = () => {
+    window.open(`/post/${id}`, "_self");
+  };
+
   return (
     <div className={clsx(styles.frame, className)}>
       <div className={styles.image}>
@@ -41,8 +45,14 @@ export const Frame = props => {
       {parseHashtags()}
       <div className={styles.buttonsWrapper}>
         <Button
-          icon={likes && likes.length ? <HeartFilled /> : <Heart />}
-          className={styles.button}
+          icon={
+            (!likes && !likes.length) || !currentUser ? (
+              <Heart />
+            ) : (
+              <HeartFilled />
+            )
+          }
+          className={clsx(styles.button, !isFeedPost && styles.fullWidth)}
           title={
             currentUser
               ? "Мне нравится!"
@@ -52,17 +62,16 @@ export const Frame = props => {
         >
           {(likes && likes.length) || "0"}
         </Button>
-        {isFeedPost && (
-          <Link to={`/post/${id}`}>
-            <Button
-              icon={<Comment />}
-              className={styles.button}
-              title="Посмотреть комментарии"
-            >
-              {(comments && comments.length) || "0"}
-            </Button>
-          </Link>
-        )}
+
+        <Button
+          icon={<Comment />}
+          className={clsx(styles.button, !isFeedPost && styles.fullWidth)}
+          title={isFeedPost ? "Посмотреть комментарии" : ""}
+          disabled={!isFeedPost}
+          onClick={openPost}
+        >
+          {(comments && comments.length) || "0"}
+        </Button>
       </div>
     </div>
   );
