@@ -1,7 +1,15 @@
 import { APP_ACTIONS } from "./../constants";
 
 const initialState = {
-  users: [],
+  users: [
+    {
+      id: "9f15cdc6-a40d-4579-a125-432285a2fbfd",
+      name: "test",
+      login: "test",
+      email: "test@gmail.com",
+      password: "123"
+    }
+  ],
   currentUser: null
 };
 
