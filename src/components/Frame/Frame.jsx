@@ -1,7 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import clsx from "clsx";
-import { Link } from "react-router-dom";
 
 import { Button } from "../Controls";
 import { ReactComponent as Comment } from "./../../images/comment.svg";
@@ -15,6 +16,8 @@ const HASHTAG_REGEX = new RegExp(/(^|\s)(#[a-z\d-_]+)/gi);
 export const Frame = props => {
   const { className, data, isFeedPost } = props;
   const { id, image, text, comments, likes } = data;
+
+  const currentUser = useSelector(state => state.users.currentUser) || null;
 
   const parseHashtags = () => (
     <p
@@ -40,7 +43,12 @@ export const Frame = props => {
         <Button
           icon={likes && likes.length ? <HeartFilled /> : <Heart />}
           className={styles.button}
-          title="Мне нравится!"
+          title={
+            currentUser
+              ? "Мне нравится!"
+              : "Войдите или зарегистрируйтесь, чтобы поставить лайк"
+          }
+          disabled={!currentUser}
         >
           {(likes && likes.length) || "0"}
         </Button>
