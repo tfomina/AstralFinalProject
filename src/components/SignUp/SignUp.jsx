@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { Form, Field } from "react-final-form";
 import clsx from "clsx";
 import { signUpAction } from "./../../redux/actions/users";
-import { CreateUUID } from "./../../utils";
+import { CreateUUID, isEmailValid } from "./../../utils";
 import { Button, Overlay, Cross } from "../Controls";
 
 import styles from "./SignUp.less";
@@ -18,6 +18,11 @@ const initialUser = {
 };
 
 const required = value => (value ? undefined : "Обязательное поле");
+const mustBeValidEmail = value =>
+  isEmailValid(value) ? undefined : "Невалидный email";
+
+const composeValidators = (...validators) => value =>
+  validators.reduce((error, validator) => error || validator(value), undefined);
 
 export const SignUp = props => {
   const { toggleSignUpVisibility, onToggleForms } = props;
@@ -87,7 +92,10 @@ export const SignUp = props => {
                 )}
               </Field>
 
-              <Field name="email" validate={required}>
+              <Field
+                name="email"
+                validate={composeValidators(required, mustBeValidEmail)}
+              >
                 {({ input, meta }) => (
                   <div>
                     <input
