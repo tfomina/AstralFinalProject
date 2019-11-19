@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 
-import feedReducer from "./feedReducer";
+import postsReducer from "./postsReducer";
+import usersReducer from "./usersReducer";
 
-export default combineReducers({ feed: feedReducer });
+export default combineReducers({ posts: postsReducer, users: usersReducer });

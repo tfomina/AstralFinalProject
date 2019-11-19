@@ -13,9 +13,7 @@ export const App = () => (
   <Layout>
     <Router>
       <Switch>
-        <Route exact path="/post/:id">
-          <Post />
-        </Route>
+        <Route exact path="/post/:id" render={props => <Post {...props} />} />
         <Route exact path="/">
           <Feed />
         </Route>

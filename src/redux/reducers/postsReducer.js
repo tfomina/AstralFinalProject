@@ -80,11 +80,11 @@ const getInitialState = () => [
 
 const initialState = getInitialState();
 
-const feedReducer = (state = initialState, action) => {
+const postsReducer = (state = initialState, action) => {
   switch (action.type) {
     default:
       return state;
   }
 };
 
-export default feedReducer;
+export default postsReducer;

@@ -1,16 +1,25 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSignInAlt, faUserPlus } from "@fortawesome/free-solid-svg-icons";
+import {
+  faSignInAlt,
+  faUserPlus,
+  faSignOutAlt
+} from "@fortawesome/free-solid-svg-icons";
 import SignIn from "./../SignIn";
 import SignUp from "./../SignUp";
 import { Button } from "../Controls";
 import { ReactComponent as Logo } from "./../../images/logo.svg";
+import { signOutAction } from "./../../redux/actions/users";
 
 import styles from "./Layout.less";
 
 export const Layout = props => {
   const [isSignUpFormVisible, setSignUpFormVisibility] = useState(false);
   const [isSignInFormVisible, setSignInFormVisibility] = useState(false);
+
+  const dispatch = useDispatch();
+  const currentUser = useSelector(state => state.users.currentUser) || null;
 
   const toggleSignInVisibility = () => {
     setSignInFormVisibility(!isSignInFormVisible);
@@ -25,6 +34,10 @@ export const Layout = props => {
     toggleSignUpVisibility();
   };
 
+  const signOut = () => {
+    dispatch(signOutAction());
+  };
+
   return (
     <>
       <div className={styles.container}>
@@ -32,24 +45,46 @@ export const Layout = props => {
           <a href="/" className="logo">
             <Logo />
           </a>
-          <Button className={styles.signIn} onClick={toggleSignInVisibility}>
-            Войти
-          </Button>
-          <FontAwesomeIcon
-            icon={faSignInAlt}
-            className={styles.signInIcon}
-            onClick={toggleSignInVisibility}
-            title="Войти"
-          />
-          <Button className={styles.signUp} onClick={toggleSignUpVisibility}>
-            Зарегистрироваться
-          </Button>
-          <FontAwesomeIcon
-            icon={faUserPlus}
-            className={styles.signUpIcon}
-            onClick={toggleSignUpVisibility}
-            title="Зарегистрироваться"
-          />
+          {currentUser ? (
+            <>
+              <Button className={styles.signOut} onClick={signOut}>
+                Выйти
+              </Button>
+              <FontAwesomeIcon
+                icon={faSignOutAlt}
+                className={styles.signOutIcon}
+                onClick={signOut}
+                title="Выйти"
+              />
+            </>
+          ) : (
+            <>
+              <Button
+                className={styles.signIn}
+                onClick={toggleSignInVisibility}
+              >
+                Войти
+              </Button>
+              <FontAwesomeIcon
+                icon={faSignInAlt}
+                className={styles.signInIcon}
+                onClick={toggleSignInVisibility}
+                title="Войти"
+              />
+              <Button
+                className={styles.signUp}
+                onClick={toggleSignUpVisibility}
+              >
+                Зарегистрироваться
+              </Button>
+              <FontAwesomeIcon
+                icon={faUserPlus}
+                className={styles.signUpIcon}
+                onClick={toggleSignUpVisibility}
+                title="Зарегистрироваться"
+              />
+            </>
+          )}
         </header>
         <main>{props.children}</main>
         <footer>
@@ -57,10 +92,16 @@ export const Layout = props => {
         </footer>
       </div>
       {isSignInFormVisible && (
-        <SignIn onClose={toggleSignInVisibility} onToggleForms={toggleForms} />
+        <SignIn
+          toggleSignInVisibility={toggleSignInVisibility}
+          onToggleForms={toggleForms}
+        />
       )}
       {isSignUpFormVisible && (
-        <SignUp onClose={toggleSignUpVisibility} onToggleForms={toggleForms} />
+        <SignUp
+          toggleSignUpVisibility={toggleSignUpVisibility}
+          onToggleForms={toggleForms}
+        />
       )}
     </>
   );

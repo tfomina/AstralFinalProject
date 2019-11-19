@@ -6,7 +6,7 @@ import Frame from "../Frame";
 import styles from "./Feed.less";
 
 export const Feed = () => {
-  const data = useSelector(state => state.feed);
+  const data = useSelector(state => state.posts) || [];
   return (
     <>
       {data && data.length ? (

@@ -5,13 +5,14 @@ import clsx from "clsx";
 import styles from "./Button.less";
 
 export const Button = props => {
-  const { className, onClick, icon, title, children } = props;
+  const { className, onClick, icon, title, children, disabled } = props;
   return (
     <button
       className={styles.button}
       onClick={onClick}
       className={clsx(styles.button, className)}
       title={title}
+      disabled={disabled}
     >
       {icon && <span className={styles.icon}>{icon}</span>}
       {children || ""}
@@ -21,12 +22,14 @@ export const Button = props => {
 
 Button.defaultProps = {
   onClick: () => {},
-  title: ""
+  title: "",
+  disabled: false
 };
 
 Button.propTypes = {
   className: PropTypes.string,
   onClick: PropTypes.func.isRequired,
   icon: PropTypes.element,
-  title: PropTypes.string
+  title: PropTypes.string,
+  disabled: PropTypes.bool
 };

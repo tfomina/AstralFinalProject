@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
+import { Link } from "react-router-dom";
 
 import { Button } from "../Controls";
 import { ReactComponent as Comment } from "./../../images/comment.svg";
@@ -12,7 +13,7 @@ import styles from "./Frame.less";
 const HASHTAG_REGEX = new RegExp(/(^|\s)(#[a-z\d-_]+)/gi);
 
 export const Frame = props => {
-  const { className, data, isCommentButtonVisible } = props;
+  const { className, data, isFeedPost } = props;
   const { id, image, text, comments, likes } = data;
 
   const parseHashtags = () => (
@@ -29,10 +30,6 @@ export const Frame = props => {
     />
   );
 
-  const openPost = () => {
-    window.open(`/post/${id}`, "_self");
-  };
-
   return (
     <div className={clsx(styles.frame, className)}>
       <div className={styles.image}>
@@ -47,15 +44,16 @@ export const Frame = props => {
         >
           {(likes && likes.length) || "0"}
         </Button>
-        {isCommentButtonVisible && (
-          <Button
-            icon={<Comment />}
-            className={styles.button}
-            title="Посмотреть комментарии"
-            onClick={openPost}
-          >
-            {(comments && comments.length) || "0"}
-          </Button>
+        {isFeedPost && (
+          <Link to={`/post/${id}`}>
+            <Button
+              icon={<Comment />}
+              className={styles.button}
+              title="Посмотреть комментарии"
+            >
+              {(comments && comments.length) || "0"}
+            </Button>
+          </Link>
         )}
       </div>
     </div>
@@ -63,7 +61,7 @@ export const Frame = props => {
 };
 
 Frame.defaultProps = {
-  isCommentButtonVisible: true
+  isFeedPost: true
 };
 
 Frame.propTypes = {
@@ -72,8 +70,8 @@ Frame.propTypes = {
     id: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
-    comments: PropTypes.number.isRequired,
-    likes: PropTypes.number.isRequired
+    comments: PropTypes.array.isRequired,
+    likes: PropTypes.array.isRequired
   }),
-  isCommentButtonVisible: PropTypes.boolean
+  isFeedPost: PropTypes.bool
 };

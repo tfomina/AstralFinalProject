@@ -1,16 +1,45 @@
 import React from "react";
+import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
 import { Form, Field } from "react-final-form";
+import { signUpAction } from "./../../redux/actions/users";
+import { CreateUUID } from "./../../utils";
 import { Button, Overlay, Cross } from "../Controls";
 
 import styles from "./SignUp.less";
 
+const initialUser = {
+  id: "",
+  name: "",
+  login: "",
+  email: "",
+  password: ""
+};
+
 export const SignUp = props => {
-  const { onClose, onToggleForms } = props;
-  const onSubmit = () => {};
+  const { toggleSignUpVisibility, onToggleForms } = props;
+
+  const dispatch = useDispatch();
+
+  const onSubmit = values => {
+    const { name, login, email, password } = values;
+    if (!name || !login || !email || !password) {
+      alert("Заполнены не все поля!");
+      return;
+    }
+
+    const user = { ...values, id: CreateUUID() };
+    dispatch(signUpAction(user));
+    toggleSignUpVisibility();
+  };
 
   const handleRedirectToSignIn = e => {
     e.preventDefault();
     onToggleForms();
+  };
+
+  const onClose = () => {
+    toggleSignUpVisibility();
   };
 
   return (
@@ -20,8 +49,9 @@ export const SignUp = props => {
         <Cross className={styles.closeForm} onClick={onClose} />
         <Form
           onSubmit={onSubmit}
+          initialValues={initialUser}
           render={({ handleSubmit }) => (
-            <form className={styles.signUpForm}>
+            <form className={styles.signUpForm} onSubmit={handleSubmit}>
               <Field
                 name="name"
                 component="input"
@@ -66,4 +96,9 @@ export const SignUp = props => {
       </div>
     </Overlay>
   );
+};
+
+SignUp.propTypes = {
+  toggleSignUpVisibility: PropTypes.func.isRequired,
+  onToggleForms: PropTypes.func.isRequired
 };

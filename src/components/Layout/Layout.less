@@ -41,9 +41,17 @@ header {
     padding-right: 0;
   }
 
+  .sign-out {
+    background-color: transparent;
+    box-shadow: none;
+    margin-left: auto;
+    padding-right: 0;
+  }
+
   .sign-in-icon,
-  .sign-up-icon {
-    color: @black;
+  .sign-up-icon,
+  .sign-out-icon {
+    color: @gray;
     cursor: pointer;
     display: none;
     font-size: 24px;
@@ -53,7 +61,8 @@ header {
     }
   }
 
-  .sign-in-icon {
+  .sign-in-icon,
+  .sign-out-icon {
     margin-left: auto;
   }
   .sign-up-icon {
@@ -64,12 +73,14 @@ header {
 @media (max-width: @small) {
   header {
     .sign-in,
-    .sign-up {
+    .sign-up,
+    .sign-out {
       display: none;
     }
 
     .sign-in-icon,
-    .sign-up-icon {
+    .sign-up-icon,
+    .sign-out-icon {
       display: block;
     }
   }
