@@ -34,6 +34,10 @@
     outline: none !important;
     font-size: 12px;
     padding: 10px 0;
+
+    &.error {
+      border-color: @red;
+    }
   }
 
   input::-moz-placeholder {
@@ -62,5 +66,10 @@
   select:-webkit-autofill:hover,
   select:-webkit-autofill:focus {
     -webkit-box-shadow: 0 0 0px 1000px @white inset !important;
+  }
+
+  .error {
+    color: @red;
+    font-size: 12px;
   }
 }

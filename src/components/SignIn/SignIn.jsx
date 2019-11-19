@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { Form, Field } from "react-final-form";
+import clsx from "clsx";
 import { Button, Overlay, Cross } from "../Controls";
 import { signInAction } from "./../../redux/actions/users";
 
@@ -12,18 +13,14 @@ const initialUser = {
   password: ""
 };
 
+const required = value => (value ? undefined : "Обязательное поле");
+
 export const SignIn = props => {
   const { toggleSignInVisibility, onToggleForms } = props;
 
   const dispatch = useDispatch();
 
   const onSubmit = values => {
-    const { login, password } = values;
-    if (!login || !password) {
-      alert("Заполнены не все поля!");
-      return;
-    }
-
     dispatch(signInAction(values));
     toggleSignInVisibility();
   };
@@ -47,20 +44,43 @@ export const SignIn = props => {
           initialValues={initialUser}
           render={({ handleSubmit }) => (
             <form className={styles.signInForm} onSubmit={handleSubmit}>
-              <Field
-                name="login"
-                component="input"
-                placeholder="Имя пользователя или email"
-                className={styles.input}
-              />
+              <Field name="login" validate={required}>
+                {({ input, meta }) => (
+                  <div>
+                    <input
+                      {...input}
+                      type="text"
+                      placeholder="Имя пользователя или email"
+                      className={clsx(
+                        styles.input,
+                        meta.error && meta.touched && "error"
+                      )}
+                    />
+                    {meta.error && meta.touched && (
+                      <div className="error">{meta.error}</div>
+                    )}
+                  </div>
+                )}
+              </Field>
 
-              <Field
-                name="password"
-                component="input"
-                type="password"
-                placeholder="Пароль"
-                className={styles.input}
-              />
+              <Field name="password" validate={required}>
+                {({ input, meta }) => (
+                  <div>
+                    <input
+                      {...input}
+                      type="password"
+                      placeholder="Пароль"
+                      className={clsx(
+                        styles.input,
+                        meta.error && meta.touched && "error"
+                      )}
+                    />
+                    {meta.error && meta.touched && (
+                      <div className="error">{meta.error}</div>
+                    )}
+                  </div>
+                )}
+              </Field>
               <Button className={styles.sibmit}>Войти</Button>
             </form>
           )}
