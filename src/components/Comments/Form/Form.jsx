@@ -1,9 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Form, Field } from "react-final-form";
+import clsx from "clsx";
 import { Button } from "../../Controls";
 
 import styles from "./Form.less";
+
+const required = value => (value ? undefined : "Обязательное поле");
 
 export const CommentForm = props => {
   const onSubmit = () => {};
@@ -12,20 +15,44 @@ export const CommentForm = props => {
     <Form
       onSubmit={onSubmit}
       render={({ handleSubmit }) => (
-        <form className={styles.form}>
-          <Field
-            name="author"
-            component="input"
-            placeholder="Автор"
-            className={styles.input}
-          />
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <Field name="author" validate={required}>
+            {({ input, meta }) => (
+              <div>
+                <input
+                  {...input}
+                  type="text"
+                  placeholder="Автор"
+                  className={clsx(
+                    styles.input,
+                    meta.error && meta.touched && "error"
+                  )}
+                />
+                {meta.error && meta.touched && (
+                  <div className="error">{meta.error}</div>
+                )}
+              </div>
+            )}
+          </Field>
 
-          <Field
-            name="comment"
-            component="input"
-            placeholder="Комментарий"
-            className={styles.input}
-          />
+          <Field name="comment" validate={required}>
+            {({ input, meta }) => (
+              <div>
+                <input
+                  {...input}
+                  type="text"
+                  placeholder="Комментарий"
+                  className={clsx(
+                    styles.input,
+                    meta.error && meta.touched && "error"
+                  )}
+                />
+                {meta.error && meta.touched && (
+                  <div className="error">{meta.error}</div>
+                )}
+              </div>
+            )}
+          </Field>
 
           <div className={styles.buttons}>
             <Button className={styles.sibmit}>Отправить</Button>
