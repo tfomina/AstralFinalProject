@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { Form, Field } from "react-final-form";
 import clsx from "clsx";
 import { signUpAction } from "./../../redux/actions/users";
-import { CreateUUID, isEmailValid } from "./../../utils";
+import { CreateUUID, isEmailValid, setItemInLocalStorage } from "./../../utils";
 import { Button, Overlay, Close } from "../Controls";
 
 import styles from "./SignUp.less";
@@ -31,6 +31,7 @@ export const SignUp = props => {
 
   const onSubmit = values => {
     const user = { ...values, id: CreateUUID() };
+    setItemInLocalStorage("currentUser", user);
     dispatch(signUpAction(user));
     toggleSignUpVisibility();
   };

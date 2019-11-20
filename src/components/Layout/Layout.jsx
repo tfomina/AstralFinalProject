@@ -13,6 +13,7 @@ import SignUp from "./../SignUp";
 import { Button } from "../Controls";
 import { ReactComponent as Logo } from "./../../images/logo.svg";
 import { signOutAction } from "./../../redux/actions/users";
+import { removeItemFromLocalStorage } from "./../../utils";
 
 import styles from "./Layout.less";
 
@@ -37,6 +38,7 @@ export const Layout = props => {
   };
 
   const signOut = () => {
+    removeItemFromLocalStorage("currentUser");
     dispatch(signOutAction());
   };
 

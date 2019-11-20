@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { Form, Field } from "react-final-form";
 import clsx from "clsx";
-import { Button, Overlay, Close } from "../Controls";
 import { signInAction } from "./../../redux/actions/users";
+import { setItemInLocalStorage } from "./../../utils";
+import { Button, Overlay, Close } from "../Controls";
 
 import styles from "./SignIn.less";
 
@@ -21,6 +22,7 @@ export const SignIn = props => {
   const dispatch = useDispatch();
 
   const onSubmit = values => {
+    setItemInLocalStorage("currentUser", { values });
     dispatch(signInAction(values));
     toggleSignInVisibility();
   };

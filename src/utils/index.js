@@ -11,3 +11,13 @@ export const isEmailValid = email => {
   var regEx = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return regEx.test(email);
 };
+
+export const setItemInLocalStorage = (key, value) => {
+  window.localStorage.setItem(key, JSON.stringify(value));
+};
+
+export const getItemFromLocalStorage = key =>
+  JSON.parse(window.localStorage.getItem(key));
+
+export const removeItemFromLocalStorage = key =>
+  window.localStorage.removeItem(key);
