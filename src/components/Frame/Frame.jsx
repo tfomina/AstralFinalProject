@@ -33,7 +33,7 @@ export const Frame = props => {
     />
   );
 
-  const likesButton = (
+  const renderLikesButton = () => (
     <Button
       icon={
         (!likes && !likes.length) || !currentUser ? <Heart /> : <HeartFilled />
@@ -75,7 +75,7 @@ export const Frame = props => {
       </div>
       {parseHashtags()}
       <div className={styles.buttonsWrapper}>
-        {likesButton}
+        {renderLikesButton()}
         {renderCommentsButton()}
       </div>
     </div>
