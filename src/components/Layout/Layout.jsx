@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -39,53 +40,50 @@ export const Layout = props => {
     dispatch(signOutAction());
   };
 
+  const renderButtons = () =>
+    currentUser ? (
+      <>
+        <Button className={styles.signOut} onClick={signOut}>
+          Выйти
+        </Button>
+        <FontAwesomeIcon
+          icon={faSignOutAlt}
+          className={styles.signOutIcon}
+          onClick={signOut}
+          title="Выйти"
+        />
+      </>
+    ) : (
+      <>
+        <Button className={styles.signIn} onClick={toggleSignInVisibility}>
+          Войти
+        </Button>
+        <FontAwesomeIcon
+          icon={faSignInAlt}
+          className={styles.signInIcon}
+          onClick={toggleSignInVisibility}
+          title="Войти"
+        />
+        <Button className={styles.signUp} onClick={toggleSignUpVisibility}>
+          Зарегистрироваться
+        </Button>
+        <FontAwesomeIcon
+          icon={faUserPlus}
+          className={styles.signUpIcon}
+          onClick={toggleSignUpVisibility}
+          title="Зарегистрироваться"
+        />
+      </>
+    );
+
   return (
     <>
       <div className={styles.container}>
         <header>
-          <a href="/" className="logo">
+          <Link to="/" className="logo">
             <Logo />
-          </a>
-          {currentUser ? (
-            <>
-              <Button className={styles.signOut} onClick={signOut}>
-                Выйти
-              </Button>
-              <FontAwesomeIcon
-                icon={faSignOutAlt}
-                className={styles.signOutIcon}
-                onClick={signOut}
-                title="Выйти"
-              />
-            </>
-          ) : (
-            <>
-              <Button
-                className={styles.signIn}
-                onClick={toggleSignInVisibility}
-              >
-                Войти
-              </Button>
-              <FontAwesomeIcon
-                icon={faSignInAlt}
-                className={styles.signInIcon}
-                onClick={toggleSignInVisibility}
-                title="Войти"
-              />
-              <Button
-                className={styles.signUp}
-                onClick={toggleSignUpVisibility}
-              >
-                Зарегистрироваться
-              </Button>
-              <FontAwesomeIcon
-                icon={faUserPlus}
-                className={styles.signUpIcon}
-                onClick={toggleSignUpVisibility}
-                title="Зарегистрироваться"
-              />
-            </>
-          )}
+          </Link>
+          {renderButtons()}
         </header>
         <main>{props.children}</main>
         <footer>

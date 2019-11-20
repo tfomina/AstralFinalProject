@@ -10,8 +10,8 @@ import Feed from "./../Feed";
 import Post from "./../Post";
 
 export const App = () => (
-  <Layout>
-    <Router>
+  <Router>
+    <Layout>
       <Switch>
         <Route exact path="/post/:id" render={props => <Post {...props} />} />
         <Route exact path="/">
@@ -19,6 +19,6 @@ export const App = () => (
         </Route>
         <Redirect to="/" />
       </Switch>
-    </Router>
-  </Layout>
+    </Layout>
+  </Router>
 );
