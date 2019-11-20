@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { Form, Field } from "react-final-form";
 import clsx from "clsx";
-import { Button, Overlay, Cross } from "../Controls";
+import { Button, Overlay, Close } from "../Controls";
 import { signInAction } from "./../../redux/actions/users";
 
 import styles from "./SignIn.less";
@@ -38,7 +38,7 @@ export const SignIn = props => {
     <Overlay>
       <div className={styles.signIn}>
         <div className={styles.title}>Вход</div>
-        <Cross className={styles.closeForm} onClick={onClose} />
+        <Close className={styles.closeForm} onClick={onClose} />
         <Form
           onSubmit={onSubmit}
           initialValues={initialUser}

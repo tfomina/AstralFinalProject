@@ -10,7 +10,7 @@ export const ListItem = props => {
     <li className={styles.item}>
       <span className={styles.author}>{userName}</span>
       <span className={styles.text}>
-        {text}{" "}
+        {text}
         <span className={styles.delete} title="Удалить комментарий"></span>
       </span>
     </li>

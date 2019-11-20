@@ -1,5 +1,5 @@
 import { Button } from "./Button/Button";
 import { Overlay } from "./Overlay/Overlay";
-import { Cross } from "./Cross/Cross";
+import { Close } from "./Close/Close";
 
-export { Button, Overlay, Cross };
+export { Button, Overlay, Close };

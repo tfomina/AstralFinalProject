@@ -5,7 +5,7 @@ import { Form, Field } from "react-final-form";
 import clsx from "clsx";
 import { signUpAction } from "./../../redux/actions/users";
 import { CreateUUID, isEmailValid } from "./../../utils";
-import { Button, Overlay, Cross } from "../Controls";
+import { Button, Overlay, Close } from "../Controls";
 
 import styles from "./SignUp.less";
 
@@ -48,7 +48,7 @@ export const SignUp = props => {
     <Overlay>
       <div className={styles.signUp}>
         <div className={styles.title}>Регистрация</div>
-        <Cross className={styles.closeForm} onClick={onClose} />
+        <Close className={styles.closeForm} onClick={onClose} />
         <Form
           onSubmit={onSubmit}
           initialValues={initialUser}

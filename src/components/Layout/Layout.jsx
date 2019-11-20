@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -105,4 +106,8 @@ export const Layout = props => {
       )}
     </>
   );
+};
+
+Layout.propTypes = {
+  children: PropTypes.node
 };
