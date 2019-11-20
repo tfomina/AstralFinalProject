@@ -1,17 +1,26 @@
 import { APP_ACTIONS } from "./../constants";
 
-const initialState = {
+const getInitialState = () => ({
   users: [
     {
       id: "9f15cdc6-a40d-4579-a125-432285a2fbfd",
-      name: "test",
-      login: "test",
-      email: "test@gmail.com",
+      name: "Иван Петров",
+      login: "ivan",
+      email: "ivanpetrov@gmail.com",
       password: "123"
+    },
+    {
+      id: "e566d47f-502f-4f2c-b1b6-2f19d5f372a3",
+      name: "Маша Сидорова",
+      login: "masha",
+      email: "mashasidorova@gmail.com",
+      password: "456"
     }
   ],
   currentUser: null
-};
+});
+
+const initialState = getInitialState();
 
 const usersReducer = (state = initialState, action) => {
   switch (action.type) {

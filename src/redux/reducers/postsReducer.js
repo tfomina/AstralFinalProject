@@ -11,6 +11,12 @@ const getInitialState = () => [
         text: "Phasellus efficitur vestibulum nisl in bibendum."
       },
       {
+        id: "6a54ee15-7efb-431a-80ae-1cd76f5de860",
+        userId: "e566d47f-502f-4f2c-b1b6-2f19d5f372a3",
+        text:
+          "Nam suscipit libero vel enim faucibus auctor. Morbi faucibus tincidunt ligula quis congue. Duis quis nisi metus. Donec rutrum turpis mauris, vel vestibulum velit varius sed. Nullam eu quam mollis, consectetur tellus vel, aliquet dolor. Sed quam leo, vulputate vel ligula a, venenatis consequat turpis. Fusce non dictum tellus. Proin ornare faucibus velit, id faucibus eros."
+      },
+      {
         id: "ca329dd5-0d68-46d3-b81a-d2b79803faa4",
         userId: "9f15cdc6-a40d-4579-a125-432285a2fbfd",
         text: "Cras non lacinia est."
@@ -19,6 +25,9 @@ const getInitialState = () => [
     likes: [
       {
         userId: "9f15cdc6-a40d-4579-a125-432285a2fbfd"
+      },
+      {
+        userId: "e566d47f-502f-4f2c-b1b6-2f19d5f372a3"
       }
     ]
   },
@@ -38,6 +47,9 @@ const getInitialState = () => [
     likes: [
       {
         userId: "9f15cdc6-a40d-4579-a125-432285a2fbfd"
+      },
+      {
+        userId: "e566d47f-502f-4f2c-b1b6-2f19d5f372a3"
       }
     ]
   },
@@ -81,7 +93,11 @@ const getInitialState = () => [
         text: "Cras non lacinia est."
       }
     ],
-    likes: []
+    likes: [
+      {
+        userId: "e566d47f-502f-4f2c-b1b6-2f19d5f372a3"
+      }
+    ]
   },
   {
     id: "49f9a4ef-fb8c-4339-9051-5e0381082682",
@@ -96,7 +112,11 @@ const getInitialState = () => [
     text:
       "Aenean ac mi egestas, semper nisl vel, pulvinar neque. In consequat enim id malesuada malesuada. Quisque ultricies, lectus et semper sodales, eros neque posuere nunc, sit amet finibus eros massa at sem. #hashtag #frame #image",
     comments: [],
-    likes: []
+    likes: [
+      {
+        userId: "e566d47f-502f-4f2c-b1b6-2f19d5f372a3"
+      }
+    ]
   },
   {
     id: "a022e54e-8289-4960-9da0-7d9b48a73b36",
