@@ -21,7 +21,7 @@ export const Frame = props => {
 
   const parseHashtags = () => (
     <p
-      className={styles.text}
+      className={clsx(styles.text, !isFeedPost && styles.fullWidth)}
       dangerouslySetInnerHTML={{
         __html: text
           ? text.replace(
@@ -33,9 +33,40 @@ export const Frame = props => {
     />
   );
 
-  const openPost = () => {
-    window.open(`/post/${id}`, "_self");
-  };
+  const likesButton = (
+    <Button
+      icon={
+        (!likes && !likes.length) || !currentUser ? <Heart /> : <HeartFilled />
+      }
+      className={clsx(styles.button, !isFeedPost && styles.fullWidth)}
+      title={
+        currentUser
+          ? "Мне нравится!"
+          : "Войдите или зарегистрируйтесь, чтобы поставить лайк"
+      }
+      disabled={!currentUser}
+    >
+      {(likes && likes.length) || "0"}
+    </Button>
+  );
+
+  const commentsButton = (
+    <Button
+      icon={<Comment />}
+      className={clsx(styles.button, !isFeedPost && styles.fullWidth)}
+      title={isFeedPost ? "Посмотреть комментарии" : ""}
+      disabled={!isFeedPost}
+    >
+      {(comments && comments.length) || "0"}
+    </Button>
+  );
+
+  const renderCommentsButton = () =>
+    isFeedPost ? (
+      <Link to={`/post/${id}`}>{commentsButton}</Link>
+    ) : (
+      commentsButton
+    );
 
   return (
     <div className={clsx(styles.frame, className)}>
@@ -44,34 +75,8 @@ export const Frame = props => {
       </div>
       {parseHashtags()}
       <div className={styles.buttonsWrapper}>
-        <Button
-          icon={
-            (!likes && !likes.length) || !currentUser ? (
-              <Heart />
-            ) : (
-              <HeartFilled />
-            )
-          }
-          className={clsx(styles.button, !isFeedPost && styles.fullWidth)}
-          title={
-            currentUser
-              ? "Мне нравится!"
-              : "Войдите или зарегистрируйтесь, чтобы поставить лайк"
-          }
-          disabled={!currentUser}
-        >
-          {(likes && likes.length) || "0"}
-        </Button>
-
-        <Button
-          icon={<Comment />}
-          className={clsx(styles.button, !isFeedPost && styles.fullWidth)}
-          title={isFeedPost ? "Посмотреть комментарии" : ""}
-          disabled={!isFeedPost}
-          onClick={openPost}
-        >
-          {(comments && comments.length) || "0"}
-        </Button>
+        {likesButton}
+        {renderCommentsButton()}
       </div>
     </div>
   );
