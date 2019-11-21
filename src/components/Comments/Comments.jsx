@@ -23,7 +23,7 @@ export const Comments = props => {
   return (
     <div className={clsx(styles.comments, className)}>
       <List comments={comments} />
-      {currentUser && <Form />}
+      {currentUser && <Form postId={data.id} />}
     </div>
   );
 };

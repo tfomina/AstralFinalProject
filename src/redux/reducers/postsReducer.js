@@ -1,3 +1,5 @@
+import { APP_ACTIONS } from "./../constants";
+
 const getInitialState = () => [
   {
     id: "147d92ae-b3ae-4d0a-9f43-6983cfceef3c",
@@ -142,11 +144,33 @@ const getInitialState = () => [
     likes: []
   }
 ];
-
 const initialState = getInitialState();
 
 const postsReducer = (state = initialState, action) => {
   switch (action.type) {
+    case APP_ACTIONS.ADD_COMMENT: {
+      const { postId, comment } = action.payload;
+      return state.map(s =>
+        s.id === postId ? { ...s, comments: [...s.comments, comment] } : s
+      );
+    }
+
+    case APP_ACTIONS.DELETE_COMMENT: {
+      const { id, postId, userId } = action.payload;
+      const comments = state.find(s => s.id === postId).comments;
+      const comment = comments.find(c => c.userId === userId);
+      if (!comment) return state;
+
+      return state.map(s =>
+        s.id === postId
+          ? { ...s, comments: s.comments.filter(c => c.id !== id) }
+          : s
+      );
+    }
+
+    case APP_ACTIONS.TOGGLE_LIKE:
+      return 3;
+
     default:
       return state;
   }

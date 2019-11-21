@@ -1,20 +1,36 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Form, Field } from "react-final-form";
+import { useSelector, useDispatch } from "react-redux";
 import clsx from "clsx";
-import { Button } from "../../Controls";
+import { addCommentAction } from "./../../../redux/actions/posts";
+import { CreateUUID, required } from "./../../../utils";
+import { Button, Error } from "../../Common";
 
 import styles from "./Form.less";
 
-const required = value => (value ? undefined : "Обязательное поле");
-
 export const CommentForm = props => {
-  const onSubmit = () => {};
+  const dispatch = useDispatch();
+  const { postId } = props;
+
+  const currentUser = useSelector(state => state.users.currentUser) || null;
+  const { login } = currentUser;
+
+  const onSubmit = values => {
+    const { text } = values;
+    dispatch(
+      addCommentAction({
+        comment: { id: CreateUUID(), text: text, userId: currentUser.id },
+        postId: postId
+      })
+    );
+  };
 
   return (
     <Form
       onSubmit={onSubmit}
-      render={({ handleSubmit }) => (
+      initialValues={{ author: login }}
+      render={({ handleSubmit, form }) => (
         <form className={styles.form} onSubmit={handleSubmit}>
           <Field name="author" validate={required}>
             {({ input, meta }) => (
@@ -23,19 +39,20 @@ export const CommentForm = props => {
                   {...input}
                   type="text"
                   placeholder="Автор"
+                  readOnly
                   className={clsx(
                     styles.input,
                     meta.error && meta.touched && "error"
                   )}
                 />
                 {meta.error && meta.touched && (
-                  <div className="error">{meta.error}</div>
+                  <Error className={styles.error}>{meta.error}</Error>
                 )}
               </div>
             )}
           </Field>
 
-          <Field name="comment" validate={required}>
+          <Field name="text" validate={required}>
             {({ input, meta }) => (
               <div>
                 <input
@@ -46,17 +63,22 @@ export const CommentForm = props => {
                     styles.input,
                     meta.error && meta.touched && "error"
                   )}
+                  autoFocus
                 />
                 {meta.error && meta.touched && (
-                  <div className="error">{meta.error}</div>
+                  <Error className={styles.error}>{meta.error}</Error>
                 )}
               </div>
             )}
           </Field>
 
           <div className={styles.buttons}>
-            <Button className={styles.sibmit}>Отправить</Button>
-            <Button className={styles.cancel}>Отменить</Button>
+            <Button className={styles.sibmit} type="submit">
+              Отправить
+            </Button>
+            <Button className={styles.cancel} onClick={form.reset}>
+              Отменить
+            </Button>
           </div>
         </form>
       )}
@@ -64,4 +86,6 @@ export const CommentForm = props => {
   );
 };
 
-CommentForm.propTypes = {};
+CommentForm.propTypes = {
+  postId: PropTypes.string.isRequired
+};

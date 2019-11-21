@@ -10,7 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import SignIn from "./../SignIn";
 import SignUp from "./../SignUp";
-import { Button } from "../Controls";
+import { Button } from "../Common";
 import { ReactComponent as Logo } from "./../../images/logo.svg";
 import { signOutAction } from "./../../redux/actions/users";
 import { removeItemFromLocalStorage } from "./../../utils";

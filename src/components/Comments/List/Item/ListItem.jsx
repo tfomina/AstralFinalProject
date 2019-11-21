@@ -1,17 +1,36 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteCommentAction } from "./../../../../redux/actions/posts";
 
 import styles from "./ListItem.less";
 
 export const ListItem = props => {
+  const dispatch = useDispatch();
+
   const { item } = props;
-  const { text, userName } = item;
+  const { id, text, userId, userName, postId } = item;
+
+  const currentUser = useSelector(state => state.users.currentUser) || null;
+
+  const isDeleteVisible = !!currentUser && userId === currentUser.id;
+
+  const deleteComment = () => {
+    dispatch(deleteCommentAction({ id, postId, userId }));
+  };
+
   return (
     <li className={styles.item}>
       <span className={styles.author}>{userName}</span>
       <span className={styles.text}>
         {text}
-        <span className={styles.delete} title="Удалить комментарий"></span>
+        {isDeleteVisible && (
+          <span
+            className={styles.delete}
+            title="Удалить комментарий"
+            onClick={deleteComment}
+          ></span>
+        )}
       </span>
     </li>
   );

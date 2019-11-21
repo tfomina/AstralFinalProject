@@ -1,4 +1,5 @@
 import { APP_ACTIONS } from "./../constants";
+import { setItemInLocalStorage } from "./../../utils";
 
 const getInitialState = () => ({
   users: [
@@ -33,14 +34,16 @@ const usersReducer = (state = initialState, action) => {
 
     case APP_ACTIONS.SIGN_IN:
       const { login, password } = action.payload;
+      const currentUser =
+        state.users.find(
+          user =>
+            (user.login === login || user.email === login) &&
+            user.password === password
+        ) || null;
+      setItemInLocalStorage("currentUser", currentUser);
       return {
         ...state,
-        currentUser:
-          state.users.find(
-            user =>
-              (user.login === login || user.email === login) &&
-              user.password === password
-          ) || null
+        currentUser
       };
 
     case APP_ACTIONS.SIGN_OUT:

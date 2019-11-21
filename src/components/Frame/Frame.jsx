@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 
-import { Button } from "../Controls";
+import { Button } from "../Common";
 import { ReactComponent as Comment } from "./../../images/comment.svg";
 import { ReactComponent as Heart } from "./../../images/heart.svg";
 import { ReactComponent as HeartFilled } from "./../../images/heart_filled.svg";
@@ -40,7 +40,7 @@ export const Frame = props => {
       }
       className={clsx(styles.button, !isFeedPost && styles.fullWidth)}
       title={
-        currentUser
+        !!currentUser
           ? "Мне нравится!"
           : "Войдите или зарегистрируйтесь, чтобы поставить лайк"
       }

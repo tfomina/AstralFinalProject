@@ -4,8 +4,14 @@ import { useDispatch } from "react-redux";
 import { Form, Field } from "react-final-form";
 import clsx from "clsx";
 import { signUpAction } from "./../../redux/actions/users";
-import { CreateUUID, isEmailValid, setItemInLocalStorage } from "./../../utils";
-import { Button, Overlay, Close } from "../Controls";
+import {
+  CreateUUID,
+  required,
+  composeValidators,
+  mustBeValidEmail,
+  setItemInLocalStorage
+} from "./../../utils";
+import { Button, Overlay, Close, Error } from "../Common";
 
 import styles from "./SignUp.less";
 
@@ -16,13 +22,6 @@ const initialUser = {
   email: "",
   password: ""
 };
-
-const required = value => (value ? undefined : "Обязательное поле");
-const mustBeValidEmail = value =>
-  isEmailValid(value) ? undefined : "Невалидный email";
-
-const composeValidators = (...validators) => value =>
-  validators.reduce((error, validator) => error || validator(value), undefined);
 
 export const SignUp = props => {
   const { toggleSignUpVisibility, onToggleForms } = props;
@@ -67,9 +66,7 @@ export const SignUp = props => {
                         meta.error && meta.touched && "error"
                       )}
                     />
-                    {meta.error && meta.touched && (
-                      <div className="error">{meta.error}</div>
-                    )}
+                    {meta.error && meta.touched && <Error>{meta.error}</Error>}
                   </div>
                 )}
               </Field>
@@ -86,9 +83,7 @@ export const SignUp = props => {
                         meta.error && meta.touched && "error"
                       )}
                     />
-                    {meta.error && meta.touched && (
-                      <div className="error">{meta.error}</div>
-                    )}
+                    {meta.error && meta.touched && <Error>{meta.error}</Error>}
                   </div>
                 )}
               </Field>
@@ -108,9 +103,7 @@ export const SignUp = props => {
                         meta.error && meta.touched && "error"
                       )}
                     />
-                    {meta.error && meta.touched && (
-                      <div className="error">{meta.error}</div>
-                    )}
+                    {meta.error && meta.touched && <Error>{meta.error}</Error>}
                   </div>
                 )}
               </Field>
@@ -127,14 +120,14 @@ export const SignUp = props => {
                         meta.error && meta.touched && "error"
                       )}
                     />
-                    {meta.error && meta.touched && (
-                      <div className="error">{meta.error}</div>
-                    )}
+                    {meta.error && meta.touched && <Error>{meta.error}</Error>}
                   </div>
                 )}
               </Field>
 
-              <Button className={styles.sibmit}>Зарегистрироваться</Button>
+              <Button className={styles.sibmit} type="submit">
+                Зарегистрироваться
+              </Button>
             </form>
           )}
         />

@@ -12,6 +12,13 @@ export const isEmailValid = email => {
   return regEx.test(email);
 };
 
+export const required = value => (value ? undefined : "Обязательное поле");
+export const mustBeValidEmail = value =>
+  isEmailValid(value) ? undefined : "Невалидный email";
+
+export const composeValidators = (...validators) => value =>
+  validators.reduce((error, validator) => error || validator(value), undefined);
+
 export const setItemInLocalStorage = (key, value) => {
   window.localStorage.setItem(key, JSON.stringify(value));
 };

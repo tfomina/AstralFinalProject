@@ -4,8 +4,8 @@ import { useDispatch } from "react-redux";
 import { Form, Field } from "react-final-form";
 import clsx from "clsx";
 import { signInAction } from "./../../redux/actions/users";
-import { setItemInLocalStorage } from "./../../utils";
-import { Button, Overlay, Close } from "../Controls";
+import { required } from "./../../utils";
+import { Button, Overlay, Close, Error } from "../Common";
 
 import styles from "./SignIn.less";
 
@@ -14,15 +14,12 @@ const initialUser = {
   password: ""
 };
 
-const required = value => (value ? undefined : "Обязательное поле");
-
 export const SignIn = props => {
   const { toggleSignInVisibility, onToggleForms } = props;
 
   const dispatch = useDispatch();
 
   const onSubmit = values => {
-    setItemInLocalStorage("currentUser", { values });
     dispatch(signInAction(values));
     toggleSignInVisibility();
   };
@@ -58,9 +55,7 @@ export const SignIn = props => {
                         meta.error && meta.touched && "error"
                       )}
                     />
-                    {meta.error && meta.touched && (
-                      <div className="error">{meta.error}</div>
-                    )}
+                    {meta.error && meta.touched && <Error>{meta.error}</Error>}
                   </div>
                 )}
               </Field>
@@ -77,13 +72,13 @@ export const SignIn = props => {
                         meta.error && meta.touched && "error"
                       )}
                     />
-                    {meta.error && meta.touched && (
-                      <div className="error">{meta.error}</div>
-                    )}
+                    {meta.error && meta.touched && <Error>{meta.error}</Error>}
                   </div>
                 )}
               </Field>
-              <Button className={styles.sibmit}>Войти</Button>
+              <Button className={styles.sibmit} type="submit">
+                Войти
+              </Button>
             </form>
           )}
         />
