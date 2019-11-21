@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import PropTypes from "prop-types";
+import { useSelector, useDispatch } from "react-redux";
 import clsx from "clsx";
+import { toggleLikeAction } from "./../../redux/actions/posts";
+import PropTypes from "prop-types";
 
 import { Button } from "../Common";
 import { ReactComponent as Comment } from "./../../images/comment.svg";
@@ -14,10 +15,15 @@ import styles from "./Frame.less";
 const HASHTAG_REGEX = new RegExp(/(^|\s)(#[a-z\d-_]+)/gi);
 
 export const Frame = props => {
+  const dispatch = useDispatch();
   const { className, data, isFeedPost } = props;
   const { id, image, text, comments, likes } = data;
 
   const currentUser = useSelector(state => state.users.currentUser) || null;
+
+  const toggleLike = () => {
+    dispatch(toggleLikeAction({ postId: id, currentUserId: currentUser.id }));
+  };
 
   const parseHashtags = () => (
     <p
@@ -33,11 +39,19 @@ export const Frame = props => {
     />
   );
 
+  const renderLikeIcon = () =>
+    !likes ||
+    !likes.length ||
+    !currentUser ||
+    (currentUser && likes.findIndex(l => l.userId === currentUser.id)) == -1 ? (
+      <Heart />
+    ) : (
+      <HeartFilled />
+    );
+
   const renderLikesButton = () => (
     <Button
-      icon={
-        (!likes && !likes.length) || !currentUser ? <Heart /> : <HeartFilled />
-      }
+      icon={renderLikeIcon()}
       className={clsx(styles.button, !isFeedPost && styles.fullWidth)}
       title={
         !!currentUser
@@ -45,6 +59,7 @@ export const Frame = props => {
           : "Войдите или зарегистрируйтесь, чтобы поставить лайк"
       }
       disabled={!currentUser}
+      onClick={toggleLike}
     >
       {(likes && likes.length) || "0"}
     </Button>

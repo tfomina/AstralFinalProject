@@ -158,7 +158,7 @@ const postsReducer = (state = initialState, action) => {
     case APP_ACTIONS.DELETE_COMMENT: {
       const { id, postId, userId } = action.payload;
       const comments = state.find(s => s.id === postId).comments;
-      const comment = comments.find(c => c.userId === userId);
+      const comment = comments.findIndex(c => c.userId === userId);
       if (!comment) return state;
 
       return state.map(s =>
@@ -168,8 +168,21 @@ const postsReducer = (state = initialState, action) => {
       );
     }
 
-    case APP_ACTIONS.TOGGLE_LIKE:
-      return 3;
+    case APP_ACTIONS.TOGGLE_LIKE: {
+      const { postId, currentUserId } = action.payload;
+
+      return state.map(s =>
+        s.id === postId
+          ? {
+              ...s,
+              likes:
+                s.likes.findIndex(l => l.userId === currentUserId) == -1
+                  ? [...s.likes, { userId: currentUserId }]
+                  : s.likes.filter(l => l.userId !== currentUserId)
+            }
+          : s
+      );
+    }
 
     default:
       return state;
