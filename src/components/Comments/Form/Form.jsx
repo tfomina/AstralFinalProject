@@ -63,7 +63,6 @@ export const CommentForm = props => {
                     styles.input,
                     meta.error && meta.touched && "error"
                   )}
-                  autoFocus
                 />
                 {meta.error && meta.touched && (
                   <Error className={styles.error}>{meta.error}</Error>
