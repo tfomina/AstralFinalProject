@@ -17,10 +17,10 @@ export const CommentForm = props => {
   const { login } = currentUser;
 
   const onSubmit = values => {
-    const { text } = values;
+    const { comment } = values;
     dispatch(
       addCommentAction({
-        comment: { id: CreateUUID(), text: text, userId: currentUser.id },
+        comment: { id: CreateUUID(), text: comment, userId: currentUser.id },
         postId: postId
       })
     );
@@ -30,12 +30,11 @@ export const CommentForm = props => {
     <Form
       onSubmit={onSubmit}
       initialValues={{ author: login }}
-      render={({ handleSubmit, form, reset }) => (
+      render={({ handleSubmit, form }) => (
         <form
           className={styles.form}
           onSubmit={event => {
             handleSubmit(event);
-            form.reset();
           }}
         >
           <Field name="author" validate={required}>
@@ -58,7 +57,7 @@ export const CommentForm = props => {
             )}
           </Field>
 
-          <Field name="text" validate={required}>
+          <Field name="comment" validate={required}>
             {({ input, meta }) => (
               <div>
                 <input
