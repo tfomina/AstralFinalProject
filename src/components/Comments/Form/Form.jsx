@@ -30,8 +30,14 @@ export const CommentForm = props => {
     <Form
       onSubmit={onSubmit}
       initialValues={{ author: login }}
-      render={({ handleSubmit, form }) => (
-        <form className={styles.form} onSubmit={handleSubmit}>
+      render={({ handleSubmit, form, reset }) => (
+        <form
+          className={styles.form}
+          onSubmit={event => {
+            handleSubmit(event);
+            form.reset();
+          }}
+        >
           <Field name="author" validate={required}>
             {({ input, meta }) => (
               <div>
