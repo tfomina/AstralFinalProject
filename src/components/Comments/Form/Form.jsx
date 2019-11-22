@@ -35,6 +35,7 @@ export const CommentForm = props => {
           className={styles.form}
           onSubmit={event => {
             handleSubmit(event);
+            //form.reset(); //TODO: разобраться, почему возникают проблемы с валидацией
           }}
         >
           <Field name="author" validate={required}>
