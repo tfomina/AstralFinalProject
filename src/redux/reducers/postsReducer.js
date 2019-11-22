@@ -159,7 +159,7 @@ const postsReducer = (state = initialState, action) => {
       const { id, postId, userId } = action.payload;
       const comments = state.find(s => s.id === postId).comments;
       const comment = comments.findIndex(c => c.userId === userId);
-      if (!comment) return state;
+      if (comment == -1) return state;
 
       return state.map(s =>
         s.id === postId
