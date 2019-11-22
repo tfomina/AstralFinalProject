@@ -5,8 +5,8 @@ import clsx from "clsx";
 import styles from "./Error.less";
 
 export const Error = props => {
-  const { className } = props;
-  return <div className={clsx(styles.error, className)}>{props.children}</div>;
+  const { className, children } = props;
+  return <div className={clsx(styles.error, className)}>{children}</div>;
 };
 
 Error.propTypes = {

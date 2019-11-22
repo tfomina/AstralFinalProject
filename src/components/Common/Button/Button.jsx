@@ -8,12 +8,11 @@ export const Button = props => {
   const { className, onClick, icon, title, children, disabled, type } = props;
   return (
     <button
-      className={styles.button}
-      onClick={onClick}
       className={clsx(styles.button, className, disabled && styles.disabled)}
       title={title}
       disabled={disabled}
       type={type}
+      onClick={onClick}
     >
       {icon && <span className={styles.icon}>{icon}</span>}
       {children || ""}
