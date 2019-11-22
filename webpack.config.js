@@ -16,12 +16,13 @@ module.exports = {
     }
   },
   devServer: {
-    contentBase: path.join(__dirname, "dist"),
+    contentBase: path.join(__dirname, "src"),
     compress: true,
     port: 3000,
     hot: true,
     historyApiFallback: true,
-    watchContentBase: true
+    watchContentBase: true,
+    open: true
   },
   optimization: {
     usedExports: true
