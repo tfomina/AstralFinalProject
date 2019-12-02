@@ -13,7 +13,10 @@ import SignUp from "./../SignUp";
 import { Button } from "../Common";
 import { ReactComponent as Logo } from "./../../images/logo.svg";
 import { signOutAction } from "./../../redux/actions/users";
-import { removeItemFromLocalStorage } from "./../../utils";
+import {
+  setItemInLocalStorage,
+  removeItemFromLocalStorage
+} from "./../../utils";
 
 import styles from "./Layout.less";
 
@@ -23,6 +26,7 @@ export const Layout = props => {
 
   const dispatch = useDispatch();
   const currentUser = useSelector(state => state.users.currentUser) || null;
+  setItemInLocalStorage("currentUser", currentUser);
 
   const toggleSignInVisibility = () => {
     setSignInFormVisibility(!isSignInFormVisible);
