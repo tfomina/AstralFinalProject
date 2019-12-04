@@ -16,7 +16,7 @@ export const CommentForm = props => {
   const currentUser = useSelector(state => state.users.currentUser) || null;
   const { login } = currentUser;
 
-  const onSubmit = values => {
+  const onSubmit = (values, { reset }) => {
     const { comment } = values;
     dispatch(
       addCommentAction({
@@ -24,6 +24,7 @@ export const CommentForm = props => {
         postId: postId
       })
     );
+    setTimeout(reset, 0);
   };
 
   return (
@@ -35,7 +36,6 @@ export const CommentForm = props => {
           className={styles.form}
           onSubmit={event => {
             handleSubmit(event);
-            //form.reset(); //TODO: разобраться, почему возникают проблемы с валидацией
           }}
         >
           <Field name="author" validate={required}>
