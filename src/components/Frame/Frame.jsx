@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import clsx from "clsx";
@@ -9,12 +9,15 @@ import { Button } from "../Common";
 import { ReactComponent as Comment } from "./../../images/comment.svg";
 import { ReactComponent as Heart } from "./../../images/heart.svg";
 import { ReactComponent as HeartFilled } from "./../../images/heart_filled.svg";
+import { ReactComponent as HeartBig } from "./../../images/heart_big.svg";
 
 import styles from "./Frame.less";
 
 const HASHTAG_REGEX = new RegExp(/(^|\s)(#[a-z\d-_]+)/gi);
 
 export const Frame = props => {
+  const [isLikeCounterVisible, setLikeCounterVisibility] = useState(false);
+
   const dispatch = useDispatch();
   const { className, data, isFeedPost } = props;
   const { id, image, text, comments, likes } = data;
@@ -23,6 +26,8 @@ export const Frame = props => {
 
   const toggleLike = () => {
     dispatch(toggleLikeAction({ postId: id, currentUserId: currentUser.id }));
+    setLikeCounterVisibility(true);
+    setTimeout(() => setLikeCounterVisibility(false), 700);
   };
 
   const parseHashtags = () => (
@@ -87,6 +92,15 @@ export const Frame = props => {
     <div className={clsx(styles.frame, className)}>
       <div className={styles.image}>
         <img src={image} alt={text} />
+        <div
+          className={clsx(
+            styles.likeCounter,
+            isLikeCounterVisible && styles.visible
+          )}
+        >
+          <HeartBig />
+          <span className={styles.count}>{likes && likes.length}</span>
+        </div>
       </div>
       {parseHashtags()}
       <div className={styles.buttonsWrapper}>
