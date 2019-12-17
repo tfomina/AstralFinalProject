@@ -36,7 +36,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [{ loader: "style-loader" }, { loader: "css-loader" }]
+        use: ["style-loader", "css-loader"]
       },
       {
         test: /\.less$/,
@@ -62,13 +62,25 @@ module.exports = {
       },
       {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        exclude: path.resolve(__dirname, "node_modules", "src/fonts"),
+        include: path.resolve(__dirname, "src/images"),
         issuer: {
           test: /\.jsx?$/
         },
-        use: ["babel-loader", "@svgr/webpack", "url-loader"]
+        use: [
+          "babel-loader",
+          "@svgr/webpack",
+          {
+            loader: "url-loader",
+            options: {
+              esModule: false
+            }
+          }
+        ]
       },
       {
         test: /\.(woff|woff2|ttf|eot|svg)$/,
+        exclude: path.resolve(__dirname, "src/images"),
         use: {
           loader: "file-loader",
           options: {
