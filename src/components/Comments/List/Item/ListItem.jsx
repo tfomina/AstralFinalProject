@@ -8,8 +8,9 @@ import styles from "./ListItem.less";
 export const ListItem = props => {
   const dispatch = useDispatch();
 
-  const { item } = props;
-  const { id, text, userId, userName, postId } = item;
+  const {
+    item: { id, text, userId, userName, postId }
+  } = props;
 
   const currentUser = useSelector(state => state.users.currentUser) || null;
 

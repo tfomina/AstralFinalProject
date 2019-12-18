@@ -19,8 +19,11 @@ export const Frame = props => {
   const [isLikeCounterVisible, setLikeCounterVisibility] = useState(false);
 
   const dispatch = useDispatch();
-  const { className, data, isFeedPost } = props;
-  const { id, image, text, comments, likes } = data;
+  const {
+    className,
+    isFeedPost,
+    data: { id, image, text, comments, likes }
+  } = props;
 
   const currentUser = useSelector(state => state.users.currentUser) || null;
 
