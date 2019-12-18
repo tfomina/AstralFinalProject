@@ -112,7 +112,7 @@ export const Frame = props => {
 };
 
 Frame.defaultProps = {
-  isFeedPost: true
+  isFeedPost: false
 };
 
 Frame.propTypes = {

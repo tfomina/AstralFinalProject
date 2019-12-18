@@ -13,7 +13,11 @@ export const Feed = () => {
         <ul className={styles.feed}>
           {data.map(item => (
             <li key={item.id}>
-              <Frame data={item} className={styles.feedFrame} />
+              <Frame
+                data={item}
+                className={styles.feedFrame}
+                isFeedPost={true}
+              />
             </li>
           ))}
         </ul>

@@ -14,7 +14,7 @@ export const Post = props => {
 
   return (
     <div className={styles.post}>
-      <Frame data={data} className={styles.postFrame} isFeedPost={false} />
+      <Frame data={data} className={styles.postFrame} />
       <Comments className={styles.postComments} data={data} />
     </div>
   );
